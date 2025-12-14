@@ -42,7 +42,7 @@ PyDism is an interactive console tool to list, mount, modify and export Windows 
 Open an elevated PowerShell in the project folder and run:
 
 ```powershell
-# from C:\SOURCECODE\PYTHON\POSTINSTALL
+# from C:\SOURCECODE\PYTHON\WIM (or the folder containing PyDism.py)
 .venv\Scripts\python.exe PyDism.py
 ```
 
@@ -170,7 +170,7 @@ where python
 - View recent logs via menu 17 (Error and Verbose).
 - Backend + wimlib indicator: status line shows `[wimlib …]` next to `[ExportBackend: ...]`; if version detected (e.g. `1.14.x`) it is displayed, else the source (`local next to exe`, `system PATH`) or `missing`.
 - Help entry: menu 20 opens this README.
-- Utility: menu 21 opens the log folder (`%TEMP%`).
+- Utility: menu 21 opens the Split WIM workflow guide (README.md); menu 22 opens the log folder (`%TEMP%`).
 - Single-line progress bars: long DISM ops (Mount/Unmount, Add-Package/Driver, Cleanup-Image, Enable/Disable-Feature, DISM export, boot.wim operations) and wimlib show an updating line to avoid flooding the console. Toggle in menu 19.
 - Informational spinner: for commands without reliable percentages (Get-Features, Get-WimInfo) a spinner is shown while output is captured. Toggle in menu 19.
 - Menu 15 (Integrity check) uses `DISM /Cleanup-Image` with `CheckHealth` and `ScanHealth`.
@@ -183,7 +183,7 @@ The status line (below the main menu) summarizes current runtime settings:
 - `[MountDirBase: ...]` — base folder for temporary mounts; `%TEMP%` if unset (set in menu 18)
 - `[Verbose: on|off]` — detailed logging (menu 19)
 - `[ExportBackend: auto|dism|wimlib]` — active export backend (menu 19)
-- `[wimlib ...]` — `wimlib-imagex` state: version (e.g. `1.14.x`), origin (`local`, `PATH`), or `missing`
+- `[wimlib ...]` — `wimlib-imagex` state: version (e.g. `1.14.x`), origin (`local (next to executable)`, `system PATH`), or `missing`
 
 ## 7. Settings & Persistence
 
@@ -192,7 +192,7 @@ The following options persist across sessions: base mount folder, verbose loggin
 Configuration file locations (first existing wins):
 
 1. Preferred: `%APPDATA%\PyDism\settings.json`
-2. Fallback (if `%APPDATA%` unavailable): `PYTHON/POSTINSTALL/config/settings.json`
+2. Fallback: `config/settings.json` next to `PyDism.py` (used when `%APPDATA%` is unavailable)
 
 Modify via menu entries:
 
@@ -206,8 +206,8 @@ Reset to defaults: delete `settings.json` and restart.
 Pressing Enter without input in menu 19 applies:
 
 - VT (Virtual Terminal): off — prompt: `on/off, Enter=off`.
-- QuickEdit: on — prompt: `on/off, Enter=on`.
-- Verbose log: on — prompt: `on/off, Enter=on` (a confirmation hint is shown).
+- Disable QuickEdit: on — prompt: `on/off, Enter=on` (default keeps QuickEdit disabled to avoid accidental pauses).
+- Verbose log: on — prompt: `on/off, Enter=on` (a confirmation hint is shown; fresh installs start with verbose off until you choose it here).
 - Center console at startup: on — prompt: `on/off, Enter=on`.
 - Restore saved position at startup: off — prompt: `on/off, Enter=off`.
 - Always on top: off — prompt: `on/off, Enter=off` (takes effect immediately).
@@ -224,7 +224,7 @@ Hints are shown after toggling VT, QuickEdit, Verbose, Center and Restore.
 - Center console at startup: centers on the monitor containing the cursor (multi-monitor aware). Default: on.
 - Restore saved position at startup: if a saved position exists and this is on, it overrides centering. Default: off.
 - Save current position as preferred: choose `S` inside menu 19 or press `S` in the main menu shortcut.
-- Reliability tuning: configure `Center retries` (0–5) and `Delay between retries (ms)` (0–1000) for cases where the window repositions slowly.
+- Reliability tuning: configure `Center retries` (0–5, default 3) and `Delay between retries (ms)` (0–1000, default 150) for cases where the window repositions slowly.
 - Config keys: `center_console` (bool), `restore_console_pos` (bool), `saved_console_pos` ({ x, y }), `center_retry` (int), `center_delay_ms` (int), `last_console_pos` (last computed), `always_on_top` (bool).
 - Always on top: keeps the window top-most when enabled (default off).
 
@@ -383,4 +383,3 @@ Notes:
 **Version**: 1.0  
 **Last Updated**: 2025  
 **Python**: 3.7+
-
