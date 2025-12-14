@@ -1,4 +1,4 @@
-# PyDism (Python)
+# PyDism
 
 Python rewrite of the legacy batch menu `BATCH/PyDism.bat` to operate on Windows image files (WIM / ESD) using DISM and (optionally) wimlib.
 
@@ -383,3 +383,4 @@ Notes:
 **Version**: 1.0  
 **Last Updated**: 2025  
 **Python**: 3.7+
+
