@@ -62,7 +62,7 @@ See: [`launcher/README.md`](../launcher/README.md)
 ## 📁 File Structure
 
 ```text
-C:\SOURCECODE\PYTHON\POSTINSTALL\
+C:\SOURCECODE\PYTHON\
 │
 ├── 📄 PyDism.py                Main program (~2500 lines)
 ├── 📄 PyDism.spec              PyInstaller configuration
@@ -73,12 +73,6 @@ C:\SOURCECODE\PYTHON\POSTINSTALL\
 │   ├── 📄 README.md                Launcher scripts guide
 │   ├── 📄 BUILD_INSTRUCTIONS.md    Build executable guide
 │   └── 📄 README_INDEX.md          This file
-│
-└── 📁 launcher\
-    ├── 📄 PyDism.bat           CMD launcher
-    ├── 📄 PyDism.ps1           PowerShell launcher
-    ├── 📄 PyDism-Admin.bat     Admin launcher
-    └── 📄 README.md            Launcher documentation
 ```
 
 ## 👥 By Role
@@ -188,3 +182,4 @@ pyinstaller --clean --noconfirm PyDism.spec
 **Platform:** Windows 7, 10, 11
 
 **Python:** 3.7+
+
