@@ -2,10 +2,6 @@
 
 Python rewrite of the legacy batch menu to operate on Windows image files (WIM / ESD) using DISM and (optionally) wimlib.
 
-**NEW FEATURE: TAB Autocompletion** — Path input now supports TAB completion powered by `prompt_toolkit`. Press TAB to autocomplete file/folder paths.
-
-> If you prefer the original Italian text it is preserved at the bottom of this file.
-
 ## Table of Contents
 
 1. Overview
@@ -383,5 +379,6 @@ Notes:
 **Version**: 1.0  
 **Last Updated**: 2025  
 **Python**: 3.7+
+
 
 
