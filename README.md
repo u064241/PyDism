@@ -1,6 +1,6 @@
 # PyDism
 
-Python rewrite of the legacy batch menu `BATCH/PyDism.bat` to operate on Windows image files (WIM / ESD) using DISM and (optionally) wimlib.
+Python rewrite of the legacy batch menu to operate on Windows image files (WIM / ESD) using DISM and (optionally) wimlib.
 
 **NEW FEATURE: TAB Autocompletion** — Path input now supports TAB completion powered by `prompt_toolkit`. Press TAB to autocomplete file/folder paths.
 
@@ -383,4 +383,5 @@ Notes:
 **Version**: 1.0  
 **Last Updated**: 2025  
 **Python**: 3.7+
+
 
