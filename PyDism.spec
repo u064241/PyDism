@@ -27,10 +27,11 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        # Include documentation files for menu 20 help
-        ('docs/README_pydism.md', 'docs'),
-        ('docs/README.md', 'docs'),
-        ('docs/SETUP.md', 'docs'),
+        # Include documentation files
+        ('README.md', '.'),
+        ('SETUP.md', '.'),
+        ('libwim-15.dll', '.'),
+        ('wimlib-imagex.exe', '.'),
     ],
     # Critical: Declare hidden imports so PyInstaller bundles them
     hiddenimports=[
@@ -67,6 +68,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='Ico/PyDism.ico',
 )
 
 # Optional: For one-file distribution, uncomment:
