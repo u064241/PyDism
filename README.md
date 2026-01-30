@@ -224,19 +224,14 @@ Hints are shown after toggling VT, QuickEdit, Verbose, Center and Restore.
 - Config keys: `center_console` (bool), `restore_console_pos` (bool), `saved_console_pos` ({ x, y }), `center_retry` (int), `center_delay_ms` (int), `last_console_pos` (last computed), `always_on_top` (bool).
 - Always on top: keeps the window top-most when enabled (default off).
 
-## 10. Packaging (README Inclusion)
+## 10. Packaging Notes
 
-If you build an executable you can ship `README_PyDism.md` next to it so menu 20 opens it directly.
+The build process automatically includes all necessary files:
+- README.md (documentation)
+- libwim-15.dll and wimlib-imagex.exe (required for WIM operations)
+- PyDism.ico (executable icon)
 
-auto-py-to-exe:
-
-- Add under "Additional Files": `README_PyDism.md;.`
-
-PyInstaller:
-
-```bash
---add-data "README_PyDism.md;."
-```
+These are configured in `PyDism.spec` and handled by `Build.ps1`.
 
 ## 11. wimlib-imagex Integration
 
@@ -295,7 +290,7 @@ pyinstaller --clean --noconfirm PyDism.spec
 
 The `PyDism.spec` file includes all necessary configuration:
 - Icon: `Ico/PyDism.ico`
-- Documentation files (README.md, SETUP.md)
+- Documentation file (README.md)
 - Required DLLs and executables
 - Hidden imports for dependencies
 
@@ -309,7 +304,6 @@ The `PyDism.spec` file includes all necessary configuration:
 6. Icon File: `Ico\PyDism.ico`
 7. Additional Files:
    - `README.md;.`
-   - `SETUP.md;.`
    - `libwim-15.dll;.`
    - `wimlib-imagex.exe;.`
 8. Click "Convert .py to .exe"
@@ -364,8 +358,8 @@ Usually harmless; it stems from cleanup of the extraction directory. The program
 - 17: Show recent logs
 - 18: Settings: mount folder
 - 19: Settings: console / verbose / backend
-- 20: Help - PyDism Guide (README_PyDism.md)
-- 21: Help - Split WIM Workflow (README.md)
+- 20: Help - PyDism Guide (opens README.md)
+- 21: Help - Split WIM Workflow (same as menu 20)
 - 22: Open log folder
 - 23: Purge temporary mount folders created this session (shows freed space)
 - 24: Unmount an existing mount folder (if you left a mount from 2/3)
