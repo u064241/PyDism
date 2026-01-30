@@ -29,7 +29,6 @@ a = Analysis(
     datas=[
         # Include documentation files
         ('README.md', '.'),
-        ('SETUP.md', '.'),
         ('libwim-15.dll', '.'),
         ('wimlib-imagex.exe', '.'),
     ],
