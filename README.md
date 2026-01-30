@@ -260,23 +260,65 @@ Recommended: build a "Window Based" executable (no console) so only the elevated
 
 When running as script (`python PyDism.py`) or a Console based exe you will simply see the current console; the non-elevated stub exits after spawning the elevated one.
 
-## 13. Quick Guide: auto-py-to-exe (Window Based + Extra Files)
+## 13. Building an Executable
+
+### Option A: Using Build.ps1 (Recommended)
+
+The project includes a PowerShell build script that automates the PyInstaller build process:
+
+```powershell
+# Basic build
+.\Build.ps1
+
+# Build with cleanup of temporary folders
+.\Build.ps1 -Clean
+```
+
+The script:
+- Automatically detects PyInstaller in virtual environment or system PATH
+- Uses the included `PyDism.spec` configuration
+- Includes the PyDism.ico icon
+- Bundles required DLLs (libwim-15.dll, wimlib-imagex.exe)
+- Optionally cleans build artifacts before and after (`-Clean` flag)
+
+Output: `dist\PyDism.exe` (single-file, console-based executable)
+
+### Option B: PyInstaller Direct
+
+```powershell
+# Install PyInstaller
+pip install pyinstaller
+
+# Build using the spec file
+pyinstaller --clean --noconfirm PyDism.spec
+```
+
+The `PyDism.spec` file includes all necessary configuration:
+- Icon: `Ico/PyDism.ico`
+- Documentation files (README.md, SETUP.md)
+- Required DLLs and executables
+- Hidden imports for dependencies
+
+### Option C: auto-py-to-exe (GUI Alternative)
 
 1. Install: `pip install auto-py-to-exe`
 2. Launch: `auto-py-to-exe`
 3. Script Location: choose `PyDism.py`
 4. Onefile/Onefolder: choose freely ("One Directory" recommended for clarity)
-5. Console Window: "Window Based" (only elevated instance shows a console)
-6. Additional Files:
-   - `README_PyDism.md;.`
-   - `wimlib-imagex.exe;.` (optional)
-7. (Optional) Icon: `Python.ico` or custom
+5. Console Window: "Console Based" (required for DISM operations)
+6. Icon File: `Ico\PyDism.ico`
+7. Additional Files:
+   - `README.md;.`
+   - `SETUP.md;.`
+   - `libwim-15.dll;.`
+   - `wimlib-imagex.exe;.`
 8. Click "Convert .py to .exe"
-9. Run `PyDism.exe` (it will auto-elevate). Status line will include `[wimlib: ...]`.
+9. Run `PyDism.exe` (it will auto-elevate)
 
 Notes:
 
 - In "One File" mode extra files are extracted at runtime (supported via `_MEIPASS`). Using "One Directory" keeps them visible next to the exe.
+- Console mode is required (not "Window Based") for proper DISM operation display.
 
 ## 14. Console Colors (VT & colorama)
 
